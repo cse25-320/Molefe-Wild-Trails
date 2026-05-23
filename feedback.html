@@ -92,7 +92,7 @@
       min-width: 180px;
     }
 
-    /* VISIT TYPE */
+    
     .visit-options {
       display: flex;
       flex-wrap: wrap;
@@ -115,7 +115,7 @@
       color: #fff;
     }
 
-    /* RECOMMEND */
+    
     .recommend-options {
       display: flex;
       gap: 1rem;
@@ -531,7 +531,7 @@
       e.preventDefault();
       let valid = true;
 
-      // Check required fields
+      
       const required = this.querySelectorAll('[required]');
       required.forEach(field => {
         if (!field.value.trim() && field.type !== 'radio' && field.type !== 'checkbox') {
@@ -542,7 +542,7 @@
         }
       });
 
-      // Check star rating
+     
       const rating = this.querySelector('input[name="rating"]:checked');
       const ratingError = document.getElementById('ratingError');
       if (!rating) {
@@ -552,7 +552,7 @@
         ratingError.style.display = 'none';
       }
 
-      // Check consent
+      
       const consent = this.querySelector('input[name="consent"]');
       if (!consent.checked) {
         valid = false;
