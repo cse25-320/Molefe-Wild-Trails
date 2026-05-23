@@ -20,7 +20,7 @@ a { text-decoration: none; transition: all 0.3s; }
 
 img { max-width: 100%; display: block; }
 
-/* TOP BAR */
+
 .top-bar {
   background: var(--green);
   color: rgba(255,255,255,0.8);
@@ -30,7 +30,7 @@ img { max-width: 100%; display: block; }
 .top-bar a { color: rgba(255,255,255,0.7); margin: 0 0.4rem; font-size: 0.85rem; }
 .top-bar a:hover { color: var(--gold); }
 
-/* NAVBAR */
+
 .main-navbar {
   background: var(--white) !important;
   padding: 1rem 0;
@@ -71,7 +71,7 @@ img { max-width: 100%; display: block; }
 .btn-book:hover { color: var(--gold) !important; }
 .navbar-toggler { border-color: var(--green); }
 
-/* HERO SLIDESHOW */
+
 .hero-slide {
   height: 92vh;
   background-size: cover;
@@ -136,7 +136,7 @@ img { max-width: 100%; display: block; }
 }
 .btn-hero:hover { background: var(--white); color: var(--dark); }
 
-/* WELCOME STRIP */
+
 .welcome-strip {
   background: var(--cream);
   padding: 4rem 1rem;
@@ -153,7 +153,7 @@ img { max-width: 100%; display: block; }
   border-radius: 2px;
 }
 
-/* DISCOVER CARDS */
+
 .discover-section { padding: 4rem 0; background: var(--white); }
 
 .discover-card {
@@ -191,7 +191,7 @@ img { max-width: 100%; display: block; }
 }
 .btn-discover:hover { background: var(--green); color: var(--white); }
 
-/* FEATURED WILDLIFE */
+
 .featured-section { padding: 4rem 0; background: var(--grey); }
 .section-title h2 { color: var(--green); font-size: 2rem; }
 .section-title p { color: #666; max-width: 550px; margin: 0 auto; }
@@ -234,14 +234,12 @@ img { max-width: 100%; display: block; }
 }
 .btn-main:hover { background: var(--gold); color: var(--dark); }
 
-/* STATS STRIP */
+
 .stats-strip { background: var(--green); padding: 3rem 0; color: var(--white); }
 .stat-num { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 900; color: var(--gold); line-height: 1; }
 .stat-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.75); margin-top: 0.3rem; }
 
-/* =====================
-   FOOTER  — FIXED
-   ===================== */
+
 footer {
   background: #111;
   color: #aaa;
@@ -254,7 +252,7 @@ footer h5 {
   margin-bottom: 1rem;
 }
 
-/* ← THIS WAS THE BUG: the closing } was missing, breaking everything below */
+
 footer .row {
   justify-content: space-between;
 }
@@ -279,7 +277,7 @@ footer hr { border-color: #333; margin: 1.5rem 0; }
 }
 .social-links a:hover { background: var(--gold); color: var(--dark); }
 
-/* PAGE BANNER (for inner pages) */
+
 .page-banner {
   background: linear-gradient(rgba(45,80,22,0.82), rgba(26,26,26,0.7)),
               url('https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=1400&q=80')
@@ -298,7 +296,7 @@ footer hr { border-color: #333; margin: 1.5rem 0; }
 }
 .breadcrumb-bar a { color: var(--gold); }
 
-/* VIDEO */
+
 .video-wrapper {
   position: relative;
   width: 100%;
@@ -313,13 +311,13 @@ footer hr { border-color: #333; margin: 1.5rem 0; }
   display: block;
 }
 
-/* ANIMATIONS */
+
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(25px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* RESPONSIVE */
+
 @media (max-width: 768px) {
   .hero-slide { height: 80vh; }
   .hero-caption { padding: 0 1.5rem; }
