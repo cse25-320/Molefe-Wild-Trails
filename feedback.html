@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Share your feedback about your visit to Molefe Wild Trails. Rate your experience and leave a comment." />
+  <title>Molefe Wild Trails | Feedback</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .form-field {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 6px;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.95rem;
+      transition: border-color 0.3s;
+      background: #fff;
+      color: #333;
+    }
+    .form-field:focus {
+      outline: none;
+      border-color: var(--green);
+    }
+    .form-label {
+      font-weight: 700;
+      color: var(--green);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+    .form-group { margin-bottom: 1.2rem; }
+
+    /* STAR RATING */
+    .star-rating {
+      display: flex;
+      flex-direction: row-reverse;
+      gap: 0.3rem;
+      justify-content: flex-end;
+    }
+    .star-rating input { display: none; }
+    .star-rating label {
+      font-size: 2.5rem;
+      color: #ddd;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .star-rating label:hover,
+    .star-rating label:hover ~ label,
+    .star-rating input:checked ~ label {
+      color: var(--gold);
+    }
+
+    /* MINI STARS for aspects */
+    .mini-star-rating {
+      display: flex;
+      flex-direction: row-reverse;
+      gap: 0.2rem;
+      justify-content: flex-end;
+    }
+    .mini-star-rating input { display: none; }
+    .mini-star-rating label {
+      font-size: 1.5rem;
+      color: #ddd;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .mini-star-rating label:hover,
+    .mini-star-rating label:hover ~ label,
+    .mini-star-rating input:checked ~ label {
+      color: var(--gold);
+    }
+
+    .aspect-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #f0f0f0;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .aspect-row:last-child { border-bottom: none; }
+    .aspect-name {
+      font-weight: 700;
+      color: var(--green);
+      font-size: 0.95rem;
+      min-width: 180px;
+    }
+
+    /* VISIT TYPE */
+    .visit-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .visit-options input { display: none; }
+    .visit-options label {
+      padding: 0.5rem 1.2rem;
+      border: 2px solid #ddd;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.85rem;
+      transition: all 0.3s;
+      color: #555;
+    }
+    .visit-options input:checked + label {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+    }
+
+    /* RECOMMEND */
+    .recommend-options {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .recommend-options input { display: none; }
+    .recommend-options label {
+      padding: 0.6rem 1.5rem;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+      color: #555;
+    }
+    .recommend-options input:checked + label {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+    }
+
+    .success-msg {
+      background: #d4edda;
+      border: 1px solid #28a745;
+      color: #155724;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      display: none;
+      margin-top: 1rem;
+    }
+
+    .section-number {
+      display: inline-flex;
+      width: 35px;
+      height: 35px;
+      background: var(--green);
+      color: #fff;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.9rem;
+      margin-right: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      color: var(--green);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 2px solid var(--light-tan, #f5ead0);
+    }
+
+    /* REVIEW CARDS */
+    .review-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      border-left: 4px solid var(--gold);
+      height: 100%;
+    }
+    .review-stars { color: var(--gold); font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .review-card blockquote {
+      font-style: italic;
+      color: #555;
+      margin-bottom: 0.8rem;
+      font-size: 0.95rem;
+    }
+    .reviewer-name { font-weight: 700; color: var(--green); font-size: 0.9rem; }
+    .reviewer-type { color: #aaa; font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg main-navbar">
+    <div class="container">
+     <a class="navbar-brand" href="index.html">
+  <img src="images/logo.png" alt="Molefe Wild Trails Logo" class="logo-img">
+</a>
+      <button class="navbar-toggler" type="button"
+              data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="wildlife.html">Wildlife</a></li>
+          <li class="nav-item"><a class="nav-link" href="activities.html">Activities</a></li>
+          <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+          <li class="nav-item"><a class="nav-link btn-book active" href="feedback.html">Feedback</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- EXISTING REVIEWS -->
+  <section style="padding:4rem 0; background:#f4f4f4;">
+    <div class="container">
+      <div class="text-center" style="margin-bottom:2.5rem;">
+        <p style="color:var(--gold); font-weight:700; text-transform:uppercase; letter-spacing:2px; font-size:0.85rem;">What Visitors Say</p>
+        <h2 style="color:var(--green); font-size:2rem;">Recent Reviews</h2>
+        <div class="divider mx-auto"></div>
+        <p style="color:#666; max-width:550px; margin:0 auto;">Real experiences from real adventurers who have visited Molefe Wild Trails.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <blockquote>"An absolutely breathtaking experience. We saw lions, elephants and a herd of zebra all in one morning! The guides were incredibly knowledgeable and passionate."</blockquote>
+            <div class="reviewer-name">Thabo M.</div>
+            <div class="reviewer-type">Leisure Visitor — Gaborone</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <blockquote>"We brought our school group here and the children were absolutely mesmerised. The education programme is excellent and the staff are so patient and passionate."</blockquote>
+            <div class="reviewer-name">Mrs. Kgosi</div>
+            <div class="reviewer-type">School Excursion — Primary School Teacher</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="review-card">
+            <div class="review-stars">★★★★☆</div>
+            <blockquote>"As a wildlife researcher, I was impressed by the diversity of species and the park's commitment to conservation. Highly recommended for academics and enthusiasts."</blockquote>
+            <div class="reviewer-name">Dr. Sarah V.</div>
+            <div class="reviewer-type">Research Visit — Wildlife Biologist</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEEDBACK FORM -->
+  <section style="padding:4rem 0; background:#fff;">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div style="background:#fff; padding:2.5rem; border-radius:12px; box-shadow:0 4px 30px rgba(0,0,0,0.1);">
+
+            <div style="text-align:center; margin-bottom:2rem;">
+              <p style="color:var(--gold); font-weight:700; text-transform:uppercase; letter-spacing:2px; font-size:0.85rem;">We Value Your Opinion</p>
+              <h2 style="color:var(--green); font-size:2rem;">Rate Your Visit</h2>
+              <div class="divider mx-auto"></div>
+              <p style="color:#666;">Please take a few minutes to share your experience at Molefe Wild Trails. Your feedback helps us improve every single day.</p>
+            </div>
+
+            <form id="feedbackForm" novalidate>
+
+              <!-- SECTION 1: PERSONAL DETAILS -->
+              <div class="section-heading">
+                <span class="section-number">1</span> Personal Details
+              </div>
+              <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label" for="fb-name">Full Name *</label>
+                    <input type="text" class="form-field" id="fb-name"
+                           name="name" placeholder="Your full name"
+                           required minlength="2" />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label" for="fb-email">Email Address *</label>
+                    <input type="email" class="form-field" id="fb-email"
+                           name="email" placeholder="your@email.com" required />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label" for="fb-date">Date of Visit *</label>
+                    <input type="date" class="form-field" id="fb-date"
+                           name="visit_date" required />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label" for="fb-groupsize">Group Size</label>
+                    <select class="form-field" id="fb-groupsize" name="group_size">
+                      <option value="">Select...</option>
+                      <option value="1">Just me (1)</option>
+                      <option value="2-5">2 – 5 people</option>
+                      <option value="6-10">6 – 10 people</option>
+                      <option value="11+">11+ people (Group)</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label class="form-label">Type of Visit *</label>
+                    <div class="visit-options">
+                      <input type="radio" id="vt-leisure" name="visit_type" value="Leisure" required />
+                      <label for="vt-leisure">Leisure</label>
+                      <input type="radio" id="vt-school" name="visit_type" value="School" />
+                      <label for="vt-school">School Excursion</label>
+                      <input type="radio" id="vt-research" name="visit_type" value="Research" />
+                      <label for="vt-research">Research</label>
+                      <input type="radio" id="vt-family" name="visit_type" value="Family" />
+                      <label for="vt-family">Family</label>
+                      <input type="radio" id="vt-corporate" name="visit_type" value="Corporate" />
+                      <label for="vt-corporate">Corporate</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- SECTION 2: OVERALL RATING -->
+              <div class="section-heading">
+                <span class="section-number">2</span> Overall Rating *
+              </div>
+              <div style="text-align:center; margin-bottom:0.5rem;">
+                <div class="star-rating" style="justify-content:center;">
+                  <input type="radio" id="r5" name="rating" value="5" required />
+                  <label for="r5" title="5 stars - Excellent">★</label>
+                  <input type="radio" id="r4" name="rating" value="4" />
+                  <label for="r4" title="4 stars - Very Good">★</label>
+                  <input type="radio" id="r3" name="rating" value="3" />
+                  <label for="r3" title="3 stars - Good">★</label>
+                  <input type="radio" id="r2" name="rating" value="2" />
+                  <label for="r2" title="2 stars - Fair">★</label>
+                  <input type="radio" id="r1" name="rating" value="1" />
+                  <label for="r1" title="1 star - Poor">★</label>
+                </div>
+                <div style="display:flex; justify-content:center; gap:2.5rem; margin-top:0.3rem;">
+                  <span style="font-size:0.78rem; color:#aaa;">Poor</span>
+                  <span style="font-size:0.78rem; color:#aaa;">Fair</span>
+                  <span style="font-size:0.78rem; color:#aaa;">Good</span>
+                  <span style="font-size:0.78rem; color:#aaa;">Very Good</span>
+                  <span style="font-size:0.78rem; color:#aaa;">Excellent</span>
+                </div>
+                <p id="ratingError" style="color:#c0392b; font-size:0.85rem; display:none; margin-top:0.5rem;">Please select a star rating before submitting.</p>
+              </div>
+
+              <!-- SECTION 3: RATE SPECIFIC ASPECTS -->
+              <div class="section-heading" style="margin-top:1.5rem;">
+                <span class="section-number">3</span> Rate Specific Aspects
+              </div>
+              <div style="background:#f9f9f9; border-radius:8px; padding:1rem 1.5rem; margin-bottom:1.5rem;">
+
+                <div class="aspect-row">
+                  <span class="aspect-name">Wildlife Sightings</span>
+                  <div class="mini-star-rating">
+                    <input type="radio" id="ws5" name="wildlife_rating" value="5" /><label for="ws5">★</label>
+                    <input type="radio" id="ws4" name="wildlife_rating" value="4" /><label for="ws4">★</label>
+                    <input type="radio" id="ws3" name="wildlife_rating" value="3" /><label for="ws3">★</label>
+                    <input type="radio" id="ws2" name="wildlife_rating" value="2" /><label for="ws2">★</label>
+                    <input type="radio" id="ws1" name="wildlife_rating" value="1" /><label for="ws1">★</label>
+                  </div>
+                </div>
+
+                <div class="aspect-row">
+                  <span class="aspect-name">Guide Knowledge</span>
+                  <div class="mini-star-rating">
+                    <input type="radio" id="gk5" name="guide_rating" value="5" /><label for="gk5">★</label>
+                    <input type="radio" id="gk4" name="guide_rating" value="4" /><label for="gk4">★</label>
+                    <input type="radio" id="gk3" name="guide_rating" value="3" /><label for="gk3">★</label>
+                    <input type="radio" id="gk2" name="guide_rating" value="2" /><label for="gk2">★</label>
+                    <input type="radio" id="gk1" name="guide_rating" value="1" /><label for="gk1">★</label>
+                  </div>
+                </div>
+
+                <div class="aspect-row">
+                  <span class="aspect-name">Safety &amp; Facilities</span>
+                  <div class="mini-star-rating">
+                    <input type="radio" id="sf5" name="safety_rating" value="5" /><label for="sf5">★</label>
+                    <input type="radio" id="sf4" name="safety_rating" value="4" /><label for="sf4">★</label>
+                    <input type="radio" id="sf3" name="safety_rating" value="3" /><label for="sf3">★</label>
+                    <input type="radio" id="sf2" name="safety_rating" value="2" /><label for="sf2">★</label>
+                    <input type="radio" id="sf1" name="safety_rating" value="1" /><label for="sf1">★</label>
+                  </div>
+                </div>
+
+                <div class="aspect-row">
+                  <span class="aspect-name">Value for Money</span>
+                  <div class="mini-star-rating">
+                    <input type="radio" id="vm5" name="value_rating" value="5" /><label for="vm5">★</label>
+                    <input type="radio" id="vm4" name="value_rating" value="4" /><label for="vm4">★</label>
+                    <input type="radio" id="vm3" name="value_rating" value="3" /><label for="vm3">★</label>
+                    <input type="radio" id="vm2" name="value_rating" value="2" /><label for="vm2">★</label>
+                    <input type="radio" id="vm1" name="value_rating" value="1" /><label for="vm1">★</label>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- SECTION 4: COMMENTS -->
+              <div class="section-heading">
+                <span class="section-number">4</span> Comments &amp; Suggestions
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="fb-highlight">Best Part of Your Visit *</label>
+                <input type="text" class="form-field" id="fb-highlight"
+                       name="highlight"
+                       placeholder="What was the highlight of your visit?"
+                       required minlength="5" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="fb-activity">Which Activity Did You Enjoy Most?</label>
+                <select class="form-field" id="fb-activity" name="best_activity">
+                  <option value="">Select an activity...</option>
+                  <option value="game">Game Viewing</option>
+                  <option value="hiking">Hiking Trails</option>
+                  <option value="birds">Bird Watching</option>
+                  <option value="guided">Guided Tour</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="fb-improve">What Could We Improve?</label>
+                <textarea class="form-field" id="fb-improve" name="improvement"
+                          rows="3"
+                          placeholder="Share any suggestions for how we can improve your experience..."></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="fb-comment">Additional Comments</label>
+                <textarea class="form-field" id="fb-comment" name="comment"
+                          rows="4"
+                          placeholder="Tell us anything else about your experience at Molefe Wild Trails..."></textarea>
+              </div>
+
+              <!-- SECTION 5: RECOMMEND -->
+              <div class="section-heading">
+                <span class="section-number">5</span> Would You Recommend Us?
+              </div>
+              <div class="form-group">
+                <div class="recommend-options">
+                  <input type="radio" id="rec-yes" name="recommend" value="yes" />
+                  <label for="rec-yes">👍 Yes, Definitely!</label>
+                  <input type="radio" id="rec-maybe" name="recommend" value="maybe" />
+                  <label for="rec-maybe">🤔 Maybe</label>
+                  <input type="radio" id="rec-no" name="recommend" value="no" />
+                  <label for="rec-no">👎 Not at This Time</label>
+                </div>
+              </div>
+
+              <!-- CONSENT -->
+              <div class="form-group" style="margin-top:1rem;">
+                <label style="display:flex; align-items:flex-start; gap:0.6rem; cursor:pointer; font-size:0.9rem; color:#555; line-height:1.5;">
+                  <input type="checkbox" name="consent" required
+                         style="width:16px; height:16px; accent-color:var(--green); margin-top:3px; flex-shrink:0;" />
+                  I agree that Molefe Wild Trails may use my feedback anonymously to improve our services and for promotional purposes. *
+                </label>
+              </div>
+
+              <!-- SUBMIT -->
+              <button type="submit" class="btn-main"
+                      style="width:100%; padding:1rem; font-size:1rem; border:none; cursor:pointer; margin-top:0.5rem;">
+                <i class="fas fa-paper-plane" style="margin-right:8px;"></i> Submit Feedback
+              </button>
+
+              <div class="success-msg" id="formSuccess">
+                <i class="fas fa-check-circle" style="color:#28a745; margin-right:8px;"></i>
+                <strong>Thank you for your feedback!</strong> We truly appreciate you taking the time to share your experience at Molefe Wild Trails. Your response has been recorded.
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="background:var(--gold); padding:4rem 1rem; text-align:center;">
+    <div class="container">
+      <h2 style="color:#1a1a1a; font-size:2.2rem; margin-bottom:0.8rem;">Plan Your Next Visit</h2>
+      <p style="color:#1a1a1a; max-width:500px; margin:0 auto 2rem; opacity:0.85;">We hope to see you again soon at Molefe Wild Trails for another unforgettable adventure.</p>
+      <a href="activities.html" class="btn-main" style="background:#1a1a1a; color:#fff;">View Activities</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+           <a class="navbar-brand" href="index.html">
+  <img src="images/logo.png" alt="Molefe Wild Trails Logo" class="logo-img">
+</a>
+          <p>Botswana's premier wildlife destination, committed to conservation and unforgettable experiences.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h5>Contact</h5>
+          <ul class="footer-links">
+            <li><i class="fas fa-map-marker-alt"></i> Masetlheng Village, Tlokweng</li>
+            <li><i class="fas fa-phone"></i> +267 305 6785</li>
+            <li><i class="fas fa-envelope"></i> info@molefewildtrails.bw</li>
+            <li><i class="fas fa-clock"></i> Open Daily: 8:00AM – 7:00PM</li>
+          </ul>
+        </div>
+      </div>
+      <hr />
+      <p class="text-center" style="color:#888; font-size:0.85rem;">&copy; 2026 Molefe Wild Trails. All Rights Reserved.</p>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      let valid = true;
+
+      // Check required fields
+      const required = this.querySelectorAll('[required]');
+      required.forEach(field => {
+        if (!field.value.trim() && field.type !== 'radio' && field.type !== 'checkbox') {
+          field.style.borderColor = '#c0392b';
+          valid = false;
+        } else if (field.type !== 'radio' && field.type !== 'checkbox') {
+          field.style.borderColor = '#2d5016';
+        }
+      });
+
+      // Check star rating
+      const rating = this.querySelector('input[name="rating"]:checked');
+      const ratingError = document.getElementById('ratingError');
+      if (!rating) {
+        ratingError.style.display = 'block';
+        valid = false;
+      } else {
+        ratingError.style.display = 'none';
+      }
+
+      // Check consent
+      const consent = this.querySelector('input[name="consent"]');
+      if (!consent.checked) {
+        valid = false;
+        consent.style.outline = '2px solid #c0392b';
+      } else {
+        consent.style.outline = 'none';
+      }
+
+      if (valid) {
+        document.getElementById('formSuccess').style.display = 'block';
+        this.reset();
+        this.querySelectorAll('.form-field').forEach(f => {
+          f.style.borderColor = '#e0e0e0';
+        });
+        setTimeout(() => {
+          document.getElementById('formSuccess').style.display = 'none';
+        }, 6000);
+      }
+    });
+  </script>
+</body>
+</html>
