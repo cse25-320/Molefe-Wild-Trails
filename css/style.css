@@ -64,14 +64,11 @@ img { max-width: 100%; display: block; }
 .main-navbar .nav-link.active { color: var(--gold) !important; }
 
 .btn-book {
-  background: var(--gold) !important;
-  color: var(--white) !important;
   border-radius: 4px;
   padding: 0.4rem 1.2rem !important;
   margin-left: 0.5rem;
 }
-.btn-book:hover { background: var(--green) !important; color: var(--white) !important; }
-
+.btn-book:hover { color: var(--gold) !important; }
 .navbar-toggler { border-color: var(--green); }
 
 /* HERO SLIDESHOW */
