@@ -350,13 +350,14 @@
                   <input type="radio" id="r1" name="rating" value="1" />
                   <label for="r1" title="1 star - Poor">★</label>
                 </div>
-                <div style="display:flex; justify-content:center; gap:2.5rem; margin-top:0.3rem;">
-                  <span style="font-size:0.78rem; color:#aaa;">Poor</span>
-                  <span style="font-size:0.78rem; color:#aaa;">Fair</span>
-                  <span style="font-size:0.78rem; color:#aaa;">Good</span>
-                  <span style="font-size:0.78rem; color:#aaa;">Very Good</span>
-                  <span style="font-size:0.78rem; color:#aaa;">Excellent</span>
-                </div>
+               <div style="display:grid; grid-template-columns: repeat(5, 3.5rem); justify-content:center; justify-items:center; margin-top:0.5rem; gap:0.2rem;">
+    <span style="font-size:0.78rem; color:#aaa; text-align:center;">Poor</span>
+    <span style="font-size:0.78rem; color:#aaa; text-align:center;">Fair</span>
+    <span style="font-size:0.78rem; color:#aaa; text-align:center;">Good</span>
+    <span style="font-size:0.78rem; color:#aaa; text-align:center; line-height:1.2;">Very<br>Good</span>
+    <span style="font-size:0.78rem; color:#aaa; text-align:center;">Excellent</span>
+</div>
+
                 <p id="ratingError" style="color:#c0392b; font-size:0.85rem; display:none; margin-top:0.5rem;">Please select a star rating before submitting.</p>
               </div>
 
