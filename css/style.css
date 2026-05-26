@@ -20,7 +20,7 @@ a { text-decoration: none; transition: all 0.3s; }
 
 img { max-width: 100%; display: block; }
 
-
+/*navigation bar*/
 .top-bar {
   background: var(--green);
   color: rgba(255,255,255,0.8);
@@ -136,7 +136,7 @@ img { max-width: 100%; display: block; }
 }
 .btn-banner:hover { background: var(--white); color: var(--dark); }
 
-
+/*Welcome message*/
 .welcome-strip {
   background: var(--cream);
   padding: 4rem 1rem;
@@ -239,7 +239,7 @@ img { max-width: 100%; display: block; }
 .stat-num { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 900; color: var(--gold); line-height: 1; }
 .stat-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.75); margin-top: 0.3rem; }
 
-
+/*footer*/
 footer {
   background: #111;
   color: #aaa;
